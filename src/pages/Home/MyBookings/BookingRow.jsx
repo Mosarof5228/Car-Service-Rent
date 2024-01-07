@@ -1,15 +1,13 @@
 
-const BookingRow = ({ booking }) => {
-    const { service, price, date, img } = booking;
+const BookingRow = ({ booking, handleBookingDelete, handleBookingConfirm }) => {
+    const { _id, service, price, date, img, status } = booking;
 
 
     return (
 
         <tr>
             <th>
-                <label>
-                    <input type="checkbox" className="checkbox" />
-                </label>
+                <button onClick={() => handleBookingDelete(_id)} className="btn btn-outline btn-error">Delete</button>
             </th>
             <td>
                 <div className="avatar">
@@ -24,7 +22,9 @@ const BookingRow = ({ booking }) => {
             <td>{date}</td>
             <td>{price}</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                {status === 'confirm' ? <span className="text-primary font-bold">Confirmed</span> :
+                    <button onClick={() => handleBookingConfirm(_id)} className="btn btn-ghost btn-xs">Please Confirm</button>
+                }
             </th>
         </tr>
 
